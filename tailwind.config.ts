@@ -18,6 +18,26 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'display': ['Playfair Display', 'serif'],
+				'heading': ['Crimson Text', 'serif'],
+				'body': ['Inter', 'sans-serif'],
+				'sans': ['Inter', 'sans-serif'],
+				'serif': ['Crimson Text', 'serif'],
+			},
+			fontSize: {
+				'display-xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+				'display-lg': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+				'display-md': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+				'display-sm': ['2.25rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+				'heading-xl': ['2rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+				'heading-lg': ['1.75rem', { lineHeight: '1.4', letterSpacing: '-0.005em' }],
+				'heading-md': ['1.5rem', { lineHeight: '1.4', letterSpacing: '-0.005em' }],
+				'heading-sm': ['1.25rem', { lineHeight: '1.5' }],
+				'body-lg': ['1.125rem', { lineHeight: '1.7' }],
+				'body-md': ['1rem', { lineHeight: '1.6' }],
+				'body-sm': ['0.875rem', { lineHeight: '1.6' }],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

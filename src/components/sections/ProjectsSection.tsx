@@ -77,10 +77,10 @@ const ProjectsSection = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            <h2 className="text-display-md md:text-display-lg font-display font-medium mb-6 gradient-text">
               Meus Projetos
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-body-lg font-body text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Uma seleção dos meus trabalhos mais recentes e significativos
             </p>
           </motion.div>
@@ -132,17 +132,17 @@ const ProjectsSection = () => {
                   {/* Project Info */}
                   <div className="p-6 space-y-4">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-2xl font-bold text-foreground group-hover:gradient-text transition-all">
+                      <h3 className="text-heading-lg font-heading font-semibold text-foreground group-hover:gradient-text transition-all">
                         {project.title}
                       </h3>
                       {project.featured && (
-                        <span className="px-3 py-1 text-xs font-semibold bg-gradient-accent text-white rounded-full">
+                        <span className="px-3 py-1 text-xs font-body font-semibold bg-gradient-accent text-white rounded-full">
                           Destaque
                         </span>
                       )}
                     </div>
 
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-body-md font-body text-muted-foreground leading-relaxed">
                       {project.description}
                     </p>
 
@@ -151,7 +151,7 @@ const ProjectsSection = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-sm bg-muted/50 text-muted-foreground rounded-full border border-border/50"
+                          className="px-3 py-1 text-body-sm font-body bg-muted/50 text-muted-foreground rounded-full border border-border/50"
                         >
                           {tech}
                         </span>
@@ -166,7 +166,7 @@ const ProjectsSection = () => {
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex items-center space-x-2 text-primary hover:text-primary-light transition-colors"
                       >
-                        <span>Ver projeto</span>
+                        <span className="font-body">Ver projeto</span>
                         <ArrowRight size={16} />
                       </motion.a>
                       <motion.a
@@ -176,7 +176,7 @@ const ProjectsSection = () => {
                         className="inline-flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <Github size={16} />
-                        <span>Código</span>
+                        <span className="font-body">Código</span>
                       </motion.a>
                     </div>
                   </div>

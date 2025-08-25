@@ -64,10 +64,10 @@ const AboutSection = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            <h2 className="text-display-md md:text-display-lg font-display font-medium mb-6 gradient-text">
               Sobre Mim
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-body-lg font-body text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Desenvolvedor apaixonado por criar soluções inovadoras que fazem a diferença
             </p>
           </motion.div>
@@ -77,10 +77,10 @@ const AboutSection = () => {
             {/* Text Content */}
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="glass p-8 rounded-2xl hover-lift">
-                <h3 className="text-2xl font-bold mb-4 gradient-text-accent">
+                <h3 className="text-heading-lg font-heading font-semibold mb-4 gradient-text-accent">
                   Minha Jornada
                 </h3>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <div className="space-y-4 text-muted-foreground leading-relaxed font-body">
                   <p>
                     Comecei minha jornada na programação há mais de 5 anos, sempre 
                     fascinado pela capacidade da tecnologia de transformar ideias 
@@ -114,8 +114,8 @@ const AboutSection = () => {
                       <div className={`w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center group-hover:shadow-glow transition-all duration-300`}>
                         <skill.icon size={24} className="text-white" />
                       </div>
-                      <h4 className="font-bold text-foreground">{skill.title}</h4>
-                      <p className="text-sm text-muted-foreground">{skill.description}</p>
+                      <h4 className="font-heading font-semibold text-foreground">{skill.title}</h4>
+                      <p className="text-body-sm font-body text-muted-foreground">{skill.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -142,11 +142,11 @@ const AboutSection = () => {
                     whileInView={{ scale: 1 }}
                     transition={{ delay: index * 0.1, type: "spring" }}
                     viewport={{ once: true }}
-                    className="text-3xl md:text-4xl font-bold gradient-text mb-2"
+                    className="text-heading-xl md:text-display-sm font-display font-medium gradient-text mb-2"
                   >
                     {stat.number}
                   </motion.div>
-                  <p className="text-muted-foreground text-sm">{stat.label}</p>
+                  <p className="text-body-sm font-body text-muted-foreground">{stat.label}</p>
                 </motion.div>
               ))}
             </div>

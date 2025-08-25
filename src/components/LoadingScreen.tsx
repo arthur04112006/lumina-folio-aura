@@ -84,7 +84,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-4xl font-bold gradient-text"
+              className="text-display-lg font-display font-medium gradient-text"
             >
               Portfólio
             </motion.h1>
@@ -108,7 +108,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
-                className="text-muted-foreground text-sm font-medium"
+                className="text-body-sm font-body font-medium text-muted-foreground"
               >
                 Carregando experiências... {Math.floor(progress)}%
               </motion.p>

@@ -47,7 +47,7 @@ const Navigation = () => {
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold gradient-text cursor-pointer"
+              className="text-2xl font-display font-medium gradient-text cursor-pointer"
               onClick={() => scrollToSection("home")}
             >
               Portfolio
@@ -61,7 +61,7 @@ const Navigation = () => {
                   onClick={() => scrollToSection(item.id)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`relative px-4 py-2 text-sm font-body font-medium transition-colors ${
                     activeSection === item.id
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"

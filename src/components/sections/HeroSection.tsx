@@ -67,7 +67,7 @@ const HeroSection = () => {
         {/* Greeting */}
         <motion.p
           variants={itemVariants}
-          className="text-primary text-lg font-medium mb-4"
+          className="text-primary text-body-lg font-body font-medium mb-4"
         >
           Olá, eu sou
         </motion.p>
@@ -75,7 +75,7 @@ const HeroSection = () => {
         {/* Name */}
         <motion.h1
           variants={itemVariants}
-          className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+          className="text-display-lg md:text-display-xl font-display font-medium mb-6 leading-tight"
         >
           <span className="gradient-text">Desenvolvedor</span>
           <br />
@@ -85,7 +85,7 @@ const HeroSection = () => {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-body-lg md:text-heading-sm font-body text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
         >
           Criando experiências digitais excepcionais com tecnologias modernas e design elegante
         </motion.p>
@@ -138,7 +138,7 @@ const HeroSection = () => {
           variants={itemVariants}
           className="flex flex-col items-center space-y-2"
         >
-          <p className="text-sm text-muted-foreground">Scroll para descobrir</p>
+          <p className="text-body-sm font-body text-muted-foreground">Scroll para descobrir</p>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

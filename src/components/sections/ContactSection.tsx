@@ -85,10 +85,10 @@ const ContactSection = () => {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            <h2 className="text-display-md md:text-display-lg font-display font-medium mb-6 gradient-text">
               Vamos Conversar
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-body-lg font-body text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Tem um projeto em mente? Vamos transformar suas ideias em realidade
             </p>
           </motion.div>
@@ -97,10 +97,10 @@ const ContactSection = () => {
             {/* Contact Info */}
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold mb-6 gradient-text-accent">
+                <h3 className="text-heading-lg font-heading font-semibold mb-6 gradient-text-accent">
                   Entre em Contato
                 </h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed">
+                <p className="text-body-md font-body text-muted-foreground mb-8 leading-relaxed">
                   Estou sempre aberto para discutir novos projetos, oportunidades 
                   criativas ou parcerias. Não hesite em entrar em contato!
                 </p>
@@ -119,8 +119,8 @@ const ContactSection = () => {
                       <info.icon size={20} className="text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground">{info.title}</h4>
-                      <p className="text-muted-foreground">{info.details}</p>
+                      <h4 className="font-heading font-semibold text-foreground">{info.title}</h4>
+                      <p className="font-body text-muted-foreground">{info.details}</p>
                     </div>
                   </motion.a>
                 ))}
@@ -128,7 +128,7 @@ const ContactSection = () => {
 
               {/* Social Links */}
               <div>
-                <h4 className="font-semibold mb-4 text-foreground">Me siga nas redes</h4>
+                <h4 className="font-heading font-semibold mb-4 text-foreground">Me siga nas redes</h4>
                 <div className="flex space-x-4">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -149,14 +149,14 @@ const ContactSection = () => {
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
               <Card className="glass p-8 hover-lift">
-                <h3 className="text-2xl font-bold mb-6 gradient-text">
+                <h3 className="text-heading-lg font-heading font-semibold mb-6 gradient-text">
                   Envie uma Mensagem
                 </h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                      <label htmlFor="name" className="block text-body-sm font-body font-medium text-foreground mb-2">
                         Nome
                       </label>
                       <Input
@@ -172,7 +172,7 @@ const ContactSection = () => {
                     </div>
                     
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      <label htmlFor="email" className="block text-body-sm font-body font-medium text-foreground mb-2">
                         Email
                       </label>
                       <Input
@@ -189,7 +189,7 @@ const ContactSection = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="subject" className="block text-body-sm font-body font-medium text-foreground mb-2">
                       Assunto
                     </label>
                     <Input
@@ -205,7 +205,7 @@ const ContactSection = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="message" className="block text-body-sm font-body font-medium text-foreground mb-2">
                       Mensagem
                     </label>
                     <Textarea
