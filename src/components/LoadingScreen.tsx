@@ -11,7 +11,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
@@ -27,6 +27,11 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
     return () => clearInterval(timer);
   }, [onComplete]);
 
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.setProperty("--loading-cursor-x", `${event.clientX}px`);
+    event.currentTarget.style.setProperty("--loading-cursor-y", `${event.clientY}px`);
+  };
+
   return (
     <AnimatePresence>
       {!isComplete && (
@@ -34,13 +39,13 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+          onPointerMove={handlePointerMove}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background [--loading-cursor-x:50vw] [--loading-cursor-y:50vh]"
         >
-          {/* Background Blur Overlay */}
           <div className="absolute inset-0 bg-gradient-hero opacity-80" />
           <div className="absolute inset-0 glass-heavy" />
-          
-          {/* Animated Background Elements */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_circle_at_var(--loading-cursor-x)_var(--loading-cursor-y),hsl(217_91%_60%_/_0.24),hsl(24_95%_53%_/_0.10)_36%,transparent_66%)] mix-blend-screen" />
+
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <motion.div
@@ -63,9 +68,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             ))}
           </div>
 
-          {/* Loading Content */}
           <div className="relative z-10 text-center space-y-8">
-            {/* Logo/Brand */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
@@ -79,17 +82,15 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               </div>
             </motion.div>
 
-            {/* Loading Text */}
             <motion.h1
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
               className="text-display-lg font-display font-medium gradient-text"
             >
-              Portfólio
+              Arthur Nicolas
             </motion.h1>
 
-            {/* Progress Bar */}
             <div className="w-80 mx-auto space-y-4">
               <motion.div
                 initial={{ scaleX: 0 }}
@@ -103,18 +104,17 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
                   transition={{ duration: 0.3 }}
                 />
               </motion.div>
-              
+
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
                 className="text-body-sm font-body font-medium text-muted-foreground"
               >
-                Carregando experiências... {Math.floor(progress)}%
+                Carregando portfólio... {Math.floor(progress)}%
               </motion.p>
             </div>
 
-            {/* Loading Spinner */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

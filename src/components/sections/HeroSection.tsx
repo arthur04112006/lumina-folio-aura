@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import profilePhoto from "@/eu .png";
 
 const HeroSection = () => {
   const containerVariants = {
@@ -24,17 +25,16 @@ const HeroSection = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "#contact", label: "Email" },
+    { icon: Github, href: "https://github.com/arthur04112006", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/nicolas-oliveira-545b1939a", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/arthur_oliv04", label: "Instagram" },
+    { icon: Mail, href: "mailto:nic.oliveira.dev@gmail.com", label: "Email" },
   ];
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-hero" />
-      
-      {/* Animated Background Particles */}
+
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (
           <motion.div
@@ -57,86 +57,98 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Main Content */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+        className="relative z-10 grid w-full max-w-6xl items-center gap-10 px-6 pt-24 text-center lg:grid-cols-[1fr_360px] lg:text-left"
       >
-        {/* Greeting */}
-        <motion.p
-          variants={itemVariants}
-          className="text-primary text-body-lg font-body font-medium mb-4"
-        >
-          Olá, eu sou
-        </motion.p>
-
-        {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-display-lg md:text-display-xl font-display font-medium mb-6 leading-tight"
-        >
-          <span className="gradient-text">Desenvolvedor</span>
-          <br />
-          <span className="gradient-text-accent">Full Stack</span>
-        </motion.h1>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="text-body-lg md:text-heading-sm font-body text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
-        >
-          Criando experiências digitais excepcionais com tecnologias modernas e design elegante
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-        >
-          <Button
-            variant="hero"
-            size="lg"
-            className="text-lg px-8 py-6 rounded-xl"
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+        <div>
+          <motion.p
+            variants={itemVariants}
+            className="text-primary text-body-lg font-body font-medium mb-4"
           >
-            Ver Projetos
-          </Button>
-          
-          <Button
-            variant="glass"
-            size="lg"
-            className="text-lg px-8 py-6 rounded-xl"
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            Entre em Contato
-          </Button>
-        </motion.div>
+            Olá, eu sou Arthur Nicolas Oliveira
+          </motion.p>
 
-        {/* Social Links */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center space-x-6 mb-12"
-        >
-          {socialLinks.map((social, index) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 glass rounded-full hover:shadow-glow transition-all duration-300"
-              aria-label={social.label}
+          <motion.h1
+            variants={itemVariants}
+            className="text-display-lg md:text-display-xl font-display font-medium mb-6 leading-tight"
+          >
+            <span className="gradient-text">Full Stack</span>
+            <br />
+            <span className="gradient-text-accent">e IA aplicada</span>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="text-body-lg md:text-heading-sm font-body text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+          >
+            Desenvolvo sistemas web, automações e soluções com inteligência artificial, unindo front-end,
+            back-end e visão prática de produto.
+          </motion.p>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-12"
+          >
+            <Button
+              variant="hero"
+              size="lg"
+              className="text-lg px-8 py-6 rounded-xl"
+              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
             >
-              <social.icon size={24} className="text-primary" />
-            </motion.a>
-          ))}
-        </motion.div>
+              Ver Projetos
+            </Button>
 
-        {/* Scroll Indicator */}
+            <Button
+              variant="glass"
+              size="lg"
+              className="text-lg px-8 py-6 rounded-xl"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Entre em Contato
+            </Button>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex justify-center lg:justify-start space-x-6 mb-12"
+          >
+            {socialLinks.map((social) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 glass rounded-full hover:shadow-glow transition-all duration-300"
+                aria-label={social.label}
+              >
+                <social.icon size={24} className="text-primary" />
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+
         <motion.div
           variants={itemVariants}
-          className="flex flex-col items-center space-y-2"
+          className="relative mx-auto w-64 sm:w-72 lg:w-80"
+        >
+          <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/10 blur-2xl" />
+          <div className="relative aspect-square overflow-hidden rounded-full border border-white/15 glass p-2 shadow-2xl">
+            <img
+              src={profilePhoto}
+              alt="Arthur Nicolas Oliveira"
+              className="h-full w-full rounded-full object-cover object-center"
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col items-center space-y-2 lg:col-span-2"
         >
           <p className="text-body-sm font-body text-muted-foreground">Scroll para descobrir</p>
           <motion.div
@@ -150,7 +162,6 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Floating Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={{ rotate: 360, y: [-20, 20, -20] }}

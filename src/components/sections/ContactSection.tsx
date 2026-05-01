@@ -1,44 +1,62 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const email = "nic.oliveira.dev@gmail.com";
+  const phoneDisplay = "(45) 99811-9853";
+  const whatsapp = "https://wa.me/5545998119853";
+  const linkedin = "https://www.linkedin.com/in/nicolas-oliveira-545b1939a";
+  const github = "https://github.com/arthur04112006";
+  const instagram = "https://www.instagram.com/arthur_oliv04";
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email",
-      details: "contato@portfolio.dev",
-      href: "mailto:contato@portfolio.dev",
+      details: email,
+      href: `mailto:${email}`,
     },
     {
-      icon: Phone,
-      title: "Telefone",
-      details: "+55 (11) 99999-9999",
-      href: "tel:+5511999999999",
+      icon: MessageCircle,
+      title: "WhatsApp",
+      details: phoneDisplay,
+      href: whatsapp,
+    },
+    {
+      icon: Linkedin,
+      title: "LinkedIn",
+      details: "nicolas-oliveira-545b1939a",
+      href: linkedin,
+    },
+    {
+      icon: Github,
+      title: "GitHub",
+      details: "github.com/arthur04112006",
+      href: github,
     },
     {
       icon: MapPin,
       title: "Localização",
-      details: "São Paulo, SP - Brasil",
+      details: "Brasil",
       href: "#",
     },
   ];
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Github, href: github, label: "GitHub" },
+    { icon: Linkedin, href: linkedin, label: "LinkedIn" },
+    { icon: Instagram, href: instagram, label: "Instagram" },
+    { icon: Mail, href: `mailto:${email}`, label: "Email" },
+    { icon: Phone, href: whatsapp, label: "WhatsApp" },
+  ];
+
+  const opportunities = [
+    "Desenvolvimento full stack",
+    "Projetos com inteligência artificial",
+    "Automação de processos",
+    "Freelas e parcerias técnicas",
   ];
 
   const containerVariants = {
@@ -60,21 +78,10 @@ const ContactSection = () => {
     },
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add form submission logic here
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background-secondary to-background" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           variants={containerVariants}
@@ -83,39 +90,38 @@ const ContactSection = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="max-w-6xl mx-auto"
         >
-          {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-display-md md:text-display-lg font-display font-medium mb-6 gradient-text">
               Vamos Conversar
             </h2>
-            <p className="text-body-lg font-body text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Tem um projeto em mente? Vamos transformar suas ideias em realidade
+            <p className="text-body-lg font-body text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Estou aberto a oportunidades, parcerias, freelas e conversas sobre desenvolvimento web, inteligência artificial e automação.
             </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
                 <h3 className="text-heading-lg font-heading font-semibold mb-6 gradient-text-accent">
                   Entre em Contato
                 </h3>
                 <p className="text-body-md font-body text-muted-foreground mb-8 leading-relaxed">
-                  Estou sempre aberto para discutir novos projetos, oportunidades 
-                  criativas ou parcerias. Não hesite em entrar em contato!
+                  Se você precisa de um desenvolvedor full stack com visão de produto, experiência prática e interesse forte por IA, estes são meus canais principais.
                 </p>
               </div>
 
-              {/* Contact Details */}
               <div className="space-y-4">
                 {contactInfo.map((info) => (
                   <motion.a
                     key={info.title}
                     href={info.href}
+                    target={info.href.startsWith("http") ? "_blank" : undefined}
+                    rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     whileHover={{ scale: 1.02, x: 10 }}
-                    className="flex items-center space-x-4 p-4 glass rounded-xl hover-lift group transition-all duration-300"
+                    transition={{ duration: 0.12, ease: "easeOut" }}
+                    className="flex items-center space-x-4 p-4 glass rounded-xl hover-lift-fast group transition-all duration-100"
                   >
-                    <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:shadow-glow transition-all duration-300">
+                    <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center group-hover:shadow-glow transition-all duration-100">
                       <info.icon size={20} className="text-white" />
                     </div>
                     <div>
@@ -126,17 +132,19 @@ const ContactSection = () => {
                 ))}
               </div>
 
-              {/* Social Links */}
               <div>
-                <h4 className="font-heading font-semibold mb-4 text-foreground">Me siga nas redes</h4>
-                <div className="flex space-x-4">
+                <h4 className="font-heading font-semibold mb-4 text-foreground">Redes</h4>
+                <div className="flex flex-wrap gap-4">
                   {socialLinks.map((social) => (
                     <motion.a
                       key={social.label}
                       href={social.href}
+                      target={social.href.startsWith("http") ? "_blank" : undefined}
+                      rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="p-3 glass rounded-full hover:shadow-glow transition-all duration-300 group"
+                      transition={{ duration: 0.1, ease: "easeOut" }}
+                      className="p-3 glass rounded-full hover:shadow-glow transition-all duration-100 group"
                       aria-label={social.label}
                     >
                       <social.icon size={20} className="text-primary group-hover:text-primary-light transition-colors" />
@@ -146,90 +154,44 @@ const ContactSection = () => {
               </div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div variants={itemVariants}>
-              <Card className="glass p-8 hover-lift">
-                <h3 className="text-heading-lg font-heading font-semibold mb-6 gradient-text">
-                  Envie uma Mensagem
-                </h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-body-sm font-body font-medium text-foreground mb-2">
-                        Nome
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="glass border-border/50 focus:border-primary"
-                        placeholder="Seu nome"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-body-sm font-body font-medium text-foreground mb-2">
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="glass border-border/50 focus:border-primary"
-                        placeholder="seu@email.com"
-                      />
-                    </div>
+              <Card className="glass p-8 hover-lift-fast h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6">
+                    <Sparkles size={24} className="text-white" />
                   </div>
 
-                  <div>
-                    <label htmlFor="subject" className="block text-body-sm font-body font-medium text-foreground mb-2">
-                      Assunto
-                    </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      required
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      className="glass border-border/50 focus:border-primary"
-                      placeholder="Assunto da mensagem"
-                    />
-                  </div>
+                  <h3 className="text-heading-lg font-heading font-semibold mb-4 gradient-text">
+                    O que posso construir
+                  </h3>
+                  <p className="text-body-md font-body text-muted-foreground leading-relaxed mb-6">
+                    Gosto de atuar em projetos que exigem clareza técnica, aprendizado rápido e entrega funcional, conectando interfaces, APIs, bancos de dados e automações.
+                  </p>
 
-                  <div>
-                    <label htmlFor="message" className="block text-body-sm font-body font-medium text-foreground mb-2">
-                      Mensagem
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      rows={5}
-                      required
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className="glass border-border/50 focus:border-primary resize-none"
-                      placeholder="Conte-me sobre seu projeto..."
-                    />
+                  <div className="grid gap-3 mb-8">
+                    {opportunities.map((item) => (
+                      <div key={item} className="flex items-center gap-3 text-muted-foreground font-body">
+                        <span className="h-2 w-2 rounded-full bg-primary" />
+                        {item}
+                      </div>
+                    ))}
                   </div>
+                </div>
 
-                  <Button
-                    type="submit"
-                    variant="hero"
-                    size="lg"
-                    className="w-full text-lg py-6 rounded-xl group"
-                  >
-                    Enviar Mensagem
-                    <Send size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button variant="hero" size="lg" className="flex-1 rounded-xl" asChild>
+                    <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                      Chamar no WhatsApp
+                      <MessageCircle size={18} className="ml-2" />
+                    </a>
                   </Button>
-                </form>
+                  <Button variant="glass" size="lg" className="flex-1 rounded-xl" asChild>
+                    <a href={`mailto:${email}`}>
+                      Enviar Email
+                      <Send size={18} className="ml-2" />
+                    </a>
+                  </Button>
+                </div>
               </Card>
             </motion.div>
           </div>

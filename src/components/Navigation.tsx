@@ -17,9 +17,20 @@ const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      for (let index = navItems.length - 1; index >= 0; index -= 1) {
+        const item = navItems[index];
+        const element = document.getElementById(item.id);
+
+        if (element && element.getBoundingClientRect().top <= 140) {
+          setActiveSection(item.id);
+          break;
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -33,7 +44,6 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Desktop Navigation */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -44,16 +54,14 @@ const Navigation = () => {
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="text-2xl font-display font-medium gradient-text cursor-pointer"
               onClick={() => scrollToSection("home")}
             >
-              Portfolio
+              Arthur Nicolas
             </motion.div>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <motion.button
@@ -80,11 +88,11 @@ const Navigation = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+              aria-label="Abrir menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
@@ -92,7 +100,6 @@ const Navigation = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -122,7 +129,6 @@ const Navigation = () => {
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu Backdrop */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
