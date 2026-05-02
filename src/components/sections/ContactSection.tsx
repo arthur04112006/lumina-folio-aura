@@ -179,7 +179,7 @@ const ContactSection = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 md:flex md:flex-row md:gap-4">
-                  <Button variant="hero" size="lg" className="h-auto min-h-12 flex-1 rounded-xl px-3 py-3 text-xs md:text-base" asChild>
+                  <Button variant="hero" size="lg" className="h-auto min-h-12 flex-1 whitespace-normal rounded-xl px-3 py-3 text-center text-xs leading-tight md:whitespace-nowrap md:text-base md:leading-normal" asChild>
                     <a href={whatsapp} target="_blank" rel="noopener noreferrer">
                       Chamar no WhatsApp
                       <MessageCircle size={16} className="ml-1.5 md:ml-2 md:h-[18px] md:w-[18px]" />
