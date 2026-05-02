@@ -24,20 +24,22 @@ import galleryScreenshot from "@/assets/optimized/gallery-screenshot.jpg";
 
 const GallerySection = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [isSectionInView, setIsSectionInView] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const autoplayRef = useRef<number>();
   const resumeAutoplayRef = useRef<number>();
 
   const photos = [
+    { src: eventTeam, title: "Hackathons", description: "Trabalho em equipe, prototipação e entrega sob pressão." },
+    { src: eventMomentTwo, title: "Tecnologia aplicada", description: "Experiências que fortalecem repertório técnico e colaboração." },
+    { src: projectMomentThree, title: "Construção de soluções", description: "Momentos de projeto, validação e evolução técnica." },
     { src: photoLinkedin, title: "Perfil profissional", description: "Foto utilizada em materiais profissionais e redes." },
     { src: eventItaipu, title: "Evento e tecnologia", description: "Participação em experiências práticas e desafios reais." },
     { src: eventBiopark, title: "Aprendizado", description: "Aprendizado contínuo em ambientes de inovação." },
-    { src: eventTeam, title: "Hackathons", description: "Trabalho em equipe, prototipação e entrega sob pressão." },
     { src: projectMomentOne, title: "Projetos práticos", description: "Registros da trajetória em desenvolvimento e tecnologia." },
     { src: projectMomentTwo, title: "Experiência acadêmica", description: "Vivências conectando estudo, prática e produto." },
-    { src: projectMomentThree, title: "Construção de soluções", description: "Momentos de projeto, validação e evolução técnica." },
     { src: projectMomentFour, title: "Eventos", description: "Participação em atividades ligadas a tecnologia e inovação." },
     { src: eventMomentOne, title: "Aprendizado contínuo", description: "Contato com problemas reais e novas abordagens." },
-    { src: eventMomentTwo, title: "Tecnologia aplicada", description: "Experiências que fortalecem repertório técnico e colaboração." },
     { src: postPhoto, title: "Arthur Nicolas", description: "Histórias, momentos e conexões movidas pela tecnologia" },
     { src: galleryScreenshot, title: "Registro de projeto", description: "Parte dos bastidores e materiais da minha trajetória." },
   ];
@@ -69,16 +71,18 @@ const GallerySection = () => {
   }, []);
 
   const startAutoplay = useCallback(() => {
-    if (!carouselApi) return;
+    if (!carouselApi || !isSectionInView) return;
 
     stopAutoplay();
     autoplayRef.current = window.setInterval(() => {
       carouselApi.scrollNext();
     }, 3500);
-  }, [carouselApi, stopAutoplay]);
+  }, [carouselApi, isSectionInView, stopAutoplay]);
 
   const scheduleAutoplayResume = useCallback(() => {
     stopAutoplay();
+
+    if (!isSectionInView) return;
 
     if (resumeAutoplayRef.current) {
       window.clearTimeout(resumeAutoplayRef.current);
@@ -87,12 +91,35 @@ const GallerySection = () => {
     resumeAutoplayRef.current = window.setTimeout(() => {
       startAutoplay();
     }, 7000);
-  }, [startAutoplay, stopAutoplay]);
+  }, [isSectionInView, startAutoplay, stopAutoplay]);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (!carouselApi) return;
 
-    startAutoplay();
+    if (isSectionInView) {
+      startAutoplay();
+    } else {
+      stopAutoplay();
+    }
+
     carouselApi.on("pointerDown", scheduleAutoplayResume);
 
     return () => {
@@ -104,7 +131,7 @@ const GallerySection = () => {
 
       carouselApi.off("pointerDown", scheduleAutoplayResume);
     };
-  }, [carouselApi, scheduleAutoplayResume, startAutoplay, stopAutoplay]);
+  }, [carouselApi, isSectionInView, scheduleAutoplayResume, startAutoplay, stopAutoplay]);
 
   useEffect(() => {
     return () => {
@@ -119,22 +146,22 @@ const GallerySection = () => {
   }, []);
 
   return (
-    <section id="gallery" className="py-20 relative overflow-hidden">
+    <section ref={sectionRef} id="gallery" className="relative overflow-hidden py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-background to-background-secondary" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container relative z-10 mx-auto px-6">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.12 }}
-          className="max-w-7xl mx-auto"
+          className="mx-auto max-w-7xl"
         >
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-display-md md:text-display-lg font-display font-medium mb-6 gradient-text">
+          <motion.div variants={itemVariants} className="mb-12 text-center">
+            <h2 className="mb-6 font-display text-display-md font-medium gradient-text md:text-display-lg">
               Momentos
             </h2>
-            <p className="text-body-lg font-body text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="mx-auto max-w-3xl font-body text-body-lg leading-relaxed text-muted-foreground">
               Registros de eventos, projetos e experiências que fazem parte da minha trajetória em tecnologia.
             </p>
           </motion.div>
@@ -151,7 +178,7 @@ const GallerySection = () => {
               <CarouselContent className="-ml-4">
                 {photos.map((photo) => (
                   <CarouselItem key={photo.src} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                    <Card className="glass overflow-hidden hover-lift h-full">
+                    <Card className="glass h-full overflow-hidden hover-lift">
                       <div className="relative aspect-[4/5] overflow-hidden">
                         <img
                           src={photo.src}
@@ -165,7 +192,7 @@ const GallerySection = () => {
                           <h3 className="font-heading text-heading-sm font-semibold text-foreground">
                             {photo.title}
                           </h3>
-                          <p className="mt-1 text-body-sm font-body text-muted-foreground leading-relaxed">
+                          <p className="mt-1 font-body text-body-sm leading-relaxed text-muted-foreground">
                             {photo.description}
                           </p>
                         </div>
@@ -176,11 +203,11 @@ const GallerySection = () => {
               </CarouselContent>
               <CarouselPrevious
                 onPointerDown={scheduleAutoplayResume}
-                className="left-2 bg-background/70 border-border/60 hover:bg-background md:-left-5"
+                className="left-2 border-border/60 bg-background/70 hover:bg-background md:-left-5"
               />
               <CarouselNext
                 onPointerDown={scheduleAutoplayResume}
-                className="right-2 bg-background/70 border-border/60 hover:bg-background md:-right-5"
+                className="right-2 border-border/60 bg-background/70 hover:bg-background md:-right-5"
               />
             </Carousel>
           </motion.div>
