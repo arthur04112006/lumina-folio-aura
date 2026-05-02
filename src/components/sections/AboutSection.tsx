@@ -195,6 +195,15 @@ const AboutSection = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex h-full flex-col space-y-4 md:space-y-6">
+              <div className="space-y-2">
+                <h3 className="font-heading text-heading-md font-semibold text-foreground md:text-heading-lg">
+                  Habilidades e conhecimentos
+                </h3>
+                <p className="font-body text-sm leading-relaxed text-muted-foreground md:text-body-md">
+                  Tecnologias e áreas em que atuo com prática real no desenvolvimento de soluções.
+                </p>
+              </div>
+
               <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {skills.map((skill, index) => (
                   <motion.div

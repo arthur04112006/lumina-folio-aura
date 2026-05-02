@@ -187,7 +187,7 @@ const Portfolio = () => {
       </AnimatePresence>
 
       <AnimatePresence>
-        {!isLoading && (
+        {!isLoading && !hasLiked && (
           <motion.button
             type="button"
             onClick={handleLike}
