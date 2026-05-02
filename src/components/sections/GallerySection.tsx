@@ -9,18 +9,18 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card } from "@/components/ui/card";
-import photoLinkedin from "@/foto_linkedin_premium.png";
-import eventItaipu from "@/FB_IMG_1776282380367.jpg";
-import eventBiopark from "@/FB_IMG_1776282393984.jpg";
-import eventTeam from "@/FB_IMG_1776282440449.jpg";
-import projectMomentOne from "@/IMG-20250408-WA0035.jpg";
-import projectMomentTwo from "@/IMG-20250630-WA0018.jpg";
-import projectMomentThree from "@/IMG-20251205-WA0022.jpg";
-import projectMomentFour from "@/IMG-20260410-WA0027.jpg";
-import eventMomentOne from "@/IMG_20260413_090847.jpg";
-import eventMomentTwo from "@/IMG_20260414_173501.jpg";
-import postPhoto from "@/minha foto para post insta.jpg";
-import galleryScreenshot from "@/Screenshot_2026-04-17-09-05-19-275_com.miui.gallery.jpg";
+import photoLinkedin from "@/assets/optimized/photo-linkedin.jpg";
+import eventItaipu from "@/assets/optimized/event-itaipu.jpg";
+import eventBiopark from "@/assets/optimized/event-biopark.jpg";
+import eventTeam from "@/assets/optimized/event-team.jpg";
+import projectMomentOne from "@/assets/optimized/project-moment-one.jpg";
+import projectMomentTwo from "@/assets/optimized/project-moment-two.jpg";
+import projectMomentThree from "@/assets/optimized/project-moment-three.jpg";
+import projectMomentFour from "@/assets/optimized/project-moment-four.jpg";
+import eventMomentOne from "@/assets/optimized/event-moment-one.jpg";
+import eventMomentTwo from "@/assets/optimized/event-moment-two.jpg";
+import postPhoto from "@/assets/optimized/post-photo.jpg";
+import galleryScreenshot from "@/assets/optimized/gallery-screenshot.jpg";
 
 const GallerySection = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
@@ -157,6 +157,8 @@ const GallerySection = () => {
                           src={photo.src}
                           alt={photo.title}
                           loading="lazy"
+                          decoding="async"
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                         />
                         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/60 to-transparent p-5">

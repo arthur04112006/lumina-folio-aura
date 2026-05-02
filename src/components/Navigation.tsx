@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const navItems = [
+  { id: "home", label: "Início" },
+  { id: "about", label: "Sobre" },
+  { id: "projects", label: "Projetos" },
+  { id: "contact", label: "Contato" },
+];
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
-  const navItems = [
-    { id: "home", label: "Início" },
-    { id: "about", label: "Sobre" },
-    { id: "projects", label: "Projetos" },
-    { id: "contact", label: "Contato" },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +27,7 @@ const Navigation = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

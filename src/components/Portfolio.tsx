@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Sparkles, ThumbsUp } from "lucide-react";
 import LoadingScreen from "./LoadingScreen";
@@ -23,6 +23,8 @@ const Portfolio = () => {
   const [hasLiked, setHasLiked] = useState(false);
   const [isRegisteringLike, setIsRegisteringLike] = useState(false);
   const [likeBurst, setLikeBurst] = useState(0);
+  const pointerFrameRef = useRef<number>();
+  const pointerPositionRef = useRef({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll();
   const smoothScrollProgress = useSpring(scrollYProgress, {
     stiffness: 140,
@@ -39,8 +41,18 @@ const Portfolio = () => {
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    event.currentTarget.style.setProperty("--cursor-x", `${event.clientX}px`);
-    event.currentTarget.style.setProperty("--cursor-y", `${event.clientY}px`);
+    pointerPositionRef.current = { x: event.clientX, y: event.clientY };
+
+    if (pointerFrameRef.current) {
+      return;
+    }
+
+    const target = event.currentTarget;
+    pointerFrameRef.current = window.requestAnimationFrame(() => {
+      target.style.setProperty("--cursor-x", `${pointerPositionRef.current.x}px`);
+      target.style.setProperty("--cursor-y", `${pointerPositionRef.current.y}px`);
+      pointerFrameRef.current = undefined;
+    });
   };
 
   const handleLike = async () => {
@@ -80,25 +92,48 @@ const Portfolio = () => {
   }, [mounted]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const elements = document.querySelectorAll(".fade-in-up, .fade-in-left");
-      elements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    let scrollFrame: number | undefined;
 
-        if (isVisible) {
-          element.classList.add("animate");
-        }
+    const handleScroll = () => {
+      if (scrollFrame) {
+        return;
+      }
+
+      scrollFrame = window.requestAnimationFrame(() => {
+        const elements = document.querySelectorAll(".fade-in-up, .fade-in-left");
+        elements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+          if (isVisible) {
+            element.classList.add("animate");
+          }
+        });
+        scrollFrame = undefined;
       });
     };
 
     if (!isLoading) {
-      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll, { passive: true });
       handleScroll();
     }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+
+      if (scrollFrame) {
+        window.cancelAnimationFrame(scrollFrame);
+      }
+    };
   }, [isLoading]);
+
+  useEffect(() => {
+    return () => {
+      if (pointerFrameRef.current) {
+        window.cancelAnimationFrame(pointerFrameRef.current);
+      }
+    };
+  }, []);
 
   if (!mounted) return null;
 
