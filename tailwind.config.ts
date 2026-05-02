@@ -19,8 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'display': ['Playfair Display', 'serif'],
-				'heading': ['Crimson Text', 'serif'],
+				'display': ['Outfit', 'sans-serif'],
+				'heading': ['Outfit', 'sans-serif'],
 				'body': ['Inter', 'sans-serif'],
 				'sans': ['Inter', 'sans-serif'],
 				'serif': ['Crimson Text', 'serif'],

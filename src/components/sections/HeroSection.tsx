@@ -48,14 +48,14 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-hero" />
 
       <div className="absolute inset-0">
         {particles.map((particle, i) => (
           <motion.div
             key={i}
-            className="absolute w-px h-px bg-primary rounded-full"
+            className="absolute h-px w-px rounded-full bg-primary"
             style={{
               left: particle.left,
               top: particle.top,
@@ -77,19 +77,19 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 grid w-full max-w-6xl items-center gap-10 px-6 pt-24 text-center lg:grid-cols-[1fr_360px] lg:text-left"
+        className="relative z-10 grid w-full max-w-6xl items-center gap-6 px-5 pb-8 pt-20 text-center sm:px-6 md:gap-10 md:pt-24 lg:grid-cols-[1fr_360px] lg:text-left"
       >
-        <div>
+        <div className="order-2 lg:order-1">
           <motion.p
             variants={itemVariants}
-            className="text-primary text-body-lg font-body font-medium mb-4"
+            className="mb-3 text-sm font-body font-medium uppercase tracking-[0.16em] text-primary md:mb-4 md:text-body-lg md:normal-case md:tracking-normal"
           >
             Olá, eu sou Arthur Nicolas Oliveira
           </motion.p>
 
           <motion.h1
             variants={itemVariants}
-            className="text-display-lg md:text-display-xl font-display font-medium mb-6 leading-tight"
+            className="mb-4 text-[2.15rem] font-display font-semibold leading-[0.95] md:mb-6 md:text-display-xl md:font-medium md:leading-tight"
           >
             <span className="gradient-text">Full Stack</span>
             <br />
@@ -98,19 +98,25 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
 
           <motion.p
             variants={itemVariants}
-            className="text-body-lg md:text-heading-sm font-body text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+            className="mx-auto mb-5 max-w-[30rem] text-sm font-body leading-relaxed text-muted-foreground md:mb-8 md:max-w-2xl md:text-heading-sm lg:mx-0"
           >
-            Desenvolvo sistemas web, automações e soluções com inteligência artificial, unindo front-end,
-            back-end e visão prática de produto.
+            <span className="md:hidden">
+              Sistemas web, automações e IA com foco em produto, performance e entrega real.
+            </span>
+            <span className="hidden md:inline">
+              Desenvolvo sistemas web, automações e soluções com inteligência artificial, unindo front-end,
+              back-end e visão prática de produto.
+            </span>
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mb-8 flex justify-center lg:justify-start"
+            className="mb-5 flex justify-center md:mb-8 lg:justify-start"
           >
-            <div className="glass inline-flex items-center gap-3 rounded-full px-4 py-2 text-body-sm font-body text-muted-foreground">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary-light">
-                <ThumbsUp size={16} />
+            <div className="glass inline-flex max-w-full items-center gap-2 rounded-full px-3 py-2 text-xs font-body text-muted-foreground md:gap-3 md:px-4 md:text-body-sm">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary-light md:h-8 md:w-8">
+                <ThumbsUp size={14} className="md:hidden" />
+                <ThumbsUp size={16} className="hidden md:block" />
               </span>
               <span>
                 <strong className="font-semibold text-foreground">{likes}</strong>{" "}
@@ -121,12 +127,12 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-12"
+            className="mb-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start md:mb-12 md:gap-4"
           >
             <Button
               variant="hero"
               size="lg"
-              className="text-lg px-8 py-6 rounded-xl"
+              className="h-12 rounded-xl px-6 text-sm font-semibold sm:text-base md:h-auto md:px-8 md:py-6 md:text-lg"
               onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
             >
               Ver Projetos
@@ -135,7 +141,7 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
             <Button
               variant="glass"
               size="lg"
-              className="text-lg px-8 py-6 rounded-xl"
+              className="h-12 rounded-xl px-6 text-sm font-semibold sm:text-base md:h-auto md:px-8 md:py-6 md:text-lg"
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             >
               Entre em Contato
@@ -144,7 +150,7 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
 
           <motion.div
             variants={itemVariants}
-            className="flex justify-center lg:justify-start space-x-6 mb-12"
+            className="mb-4 flex justify-center gap-3 md:mb-12 md:gap-6 lg:justify-start"
           >
             {socialLinks.map((social) => (
               <motion.a
@@ -154,10 +160,11 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
                 rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-3 glass rounded-full hover:shadow-glow transition-all duration-300"
+                className="rounded-full glass p-2.5 transition-all duration-300 hover:shadow-glow md:p-3"
                 aria-label={social.label}
               >
-                <social.icon size={24} className="text-primary" />
+                <social.icon size={20} className="text-primary md:hidden" />
+                <social.icon size={24} className="hidden text-primary md:block" />
               </motion.a>
             ))}
           </motion.div>
@@ -165,9 +172,9 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
 
         <motion.div
           variants={itemVariants}
-          className="relative mx-auto w-64 sm:w-72 lg:w-80"
+          className="order-1 relative mx-auto mt-2 w-40 sm:w-56 md:w-72 lg:order-2 lg:w-80"
         >
-          <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/10 blur-2xl" />
+          <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/10 blur-2xl md:-inset-4" />
           <div className="relative aspect-square overflow-hidden rounded-full border border-white/15 glass p-2 shadow-2xl">
             <img
               src={profilePhoto}
@@ -181,13 +188,13 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col items-center space-y-2 pb-4 lg:col-span-2 md:pb-0"
+          className="hidden flex-col items-center space-y-2 pb-4 md:flex md:pb-0 lg:col-span-2"
         >
-          <p className="text-body-sm font-body text-muted-foreground">Scroll para descobrir</p>
+          <p className="text-body-sm font-body text-muted-foreground">Desça para descobrir</p>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="p-2 glass rounded-full cursor-pointer"
+            className="cursor-pointer rounded-full glass p-2"
             onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
           >
             <ArrowDown size={20} className="text-primary" />
@@ -195,21 +202,21 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
         </motion.div>
       </motion.div>
 
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="pointer-events-none absolute inset-0">
         <motion.div
           animate={{ rotate: 360, y: [-20, 20, -20] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-20 left-10 w-20 h-20 glass rounded-full opacity-30"
+          className="absolute left-10 top-20 h-20 w-20 rounded-full glass opacity-30"
         />
         <motion.div
           animate={{ rotate: -360, y: [20, -20, 20] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-32 right-16 w-16 h-16 glass rounded-full opacity-20"
+          className="absolute bottom-32 right-16 h-16 w-16 rounded-full glass opacity-20"
         />
         <motion.div
           animate={{ rotate: 360, x: [-30, 30, -30] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 right-10 w-12 h-12 glass rounded-full opacity-40"
+          className="absolute right-10 top-1/2 h-12 w-12 rounded-full glass opacity-40"
         />
       </div>
     </section>
