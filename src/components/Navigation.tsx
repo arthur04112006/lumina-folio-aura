@@ -52,7 +52,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between gap-2">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="shrink-0 cursor-pointer whitespace-nowrap font-display text-[0.65rem] font-medium leading-none gradient-text sm:text-xs md:text-2xl"
+            className="shrink-0 cursor-pointer whitespace-nowrap font-display text-[0.72rem] font-medium leading-none gradient-text sm:text-xs md:text-2xl"
             onClick={() => scrollToSection("home")}
           >
             Arthur Nicolas
@@ -65,7 +65,7 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`relative px-1 py-2 font-body text-[0.58rem] font-medium leading-none transition-colors sm:text-[0.68rem] md:px-4 md:text-sm md:leading-normal ${
+                className={`relative px-1 py-2 font-body text-[0.64rem] font-medium leading-none transition-colors sm:text-[0.68rem] md:px-4 md:text-sm md:leading-normal ${
                   activeSection === item.id
                     ? "text-primary"
                     : "text-muted-foreground hover:text-foreground"

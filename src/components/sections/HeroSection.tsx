@@ -181,7 +181,7 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col items-center space-y-2 lg:col-span-2"
+          className="flex flex-col items-center space-y-2 pb-4 lg:col-span-2 md:pb-0"
         >
           <p className="text-body-sm font-body text-muted-foreground">Scroll para descobrir</p>
           <motion.div
