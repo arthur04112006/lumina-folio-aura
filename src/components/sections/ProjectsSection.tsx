@@ -125,10 +125,10 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
+    <section id="projects" className="py-14 md:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-background-secondary" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -136,16 +136,16 @@ const ProjectsSection = () => {
           viewport={{ once: true, amount: 0.08 }}
           className="max-w-7xl mx-auto"
         >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-display-md md:text-display-lg font-display font-medium mb-6 gradient-text">
+          <motion.div variants={itemVariants} className="text-center mb-10 md:mb-16">
+            <h2 className="text-display-sm md:text-display-lg font-display font-medium mb-4 md:mb-6 gradient-text">
               Meus Projetos
             </h2>
-            <p className="text-body-lg font-body text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-body-md md:text-body-lg font-body text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Projetos que mostram minha atuação em aplicações web, inteligência artificial, automação e soluções completas.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 md:gap-6 mb-10 md:mb-12">
             {projects.map((project) => (
               <motion.div
                 key={project.title}
@@ -156,21 +156,21 @@ const ProjectsSection = () => {
                 <Card className={`glass overflow-hidden hover-lift transition-all duration-500 ${
                   project.featured ? "border-primary/20" : ""
                 }`}>
-                  <div className="relative h-48 md:h-56 overflow-hidden">
+                  <div className="relative h-24 sm:h-32 md:h-56 overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.accent}`} />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.16),transparent_32%),radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent_28%)]" />
-                    <div className="absolute inset-0 flex items-center justify-center px-6">
+                    <div className="absolute inset-0 flex items-center justify-center px-3 md:px-6">
                       <div className="text-center">
-                        <p className="text-xs font-body text-primary-light mb-2 uppercase tracking-[0.22em]">
+                        <p className="text-[10px] md:text-xs font-body text-primary-light mb-1 md:mb-2 uppercase tracking-[0.18em] md:tracking-[0.22em]">
                           Projeto
                         </p>
-                        <h3 className="text-heading-lg md:text-heading-xl font-display font-medium text-foreground">
+                        <h3 className="text-base sm:text-heading-sm md:text-heading-xl font-display font-medium leading-tight text-foreground">
                           {project.title}
                         </h3>
                       </div>
                     </div>
 
-                    <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-wrap items-center justify-center gap-4 p-6">
+                    <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-wrap items-center justify-center gap-2 md:gap-4 p-3 md:p-6">
                       {project.demoLink && (
                         <Button variant="hero" size="sm" className="rounded-full" asChild>
                           <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
@@ -196,34 +196,34 @@ const ProjectsSection = () => {
                     </div>
                   </div>
 
-                  <div className="p-5 space-y-3">
-                    <div className="flex items-center justify-between gap-4">
-                      <h3 className="text-heading-md font-heading font-semibold text-foreground group-hover:gradient-text transition-all">
+                  <div className="p-3 md:p-5 space-y-2 md:space-y-3">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4">
+                      <h3 className="text-base sm:text-heading-sm md:text-heading-md font-heading font-semibold leading-tight text-foreground group-hover:gradient-text transition-all">
                         {project.title}
                       </h3>
                       {project.featured && (
-                        <span className="px-3 py-1 text-xs font-body font-semibold bg-gradient-accent text-white rounded-full">
+                        <span className="w-fit px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-body font-semibold bg-gradient-accent text-white rounded-full">
                           Destaque
                         </span>
                       )}
                     </div>
 
-                    <p className="text-body-sm font-body text-muted-foreground leading-relaxed">
+                    <p className="line-clamp-3 text-xs md:text-body-sm font-body text-muted-foreground leading-relaxed">
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 md:gap-2">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className={`px-2.5 py-1 text-xs font-body font-medium rounded-full border ${techStyles[tech] ?? "border-primary/40 bg-primary/10 text-primary-light"}`}
+                          className={`px-2 md:px-2.5 py-0.5 md:py-1 text-[10px] md:text-xs font-body font-medium rounded-full border ${techStyles[tech] ?? "border-primary/40 bg-primary/10 text-primary-light"}`}
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 pt-2">
+                    <div className="flex flex-wrap items-center gap-3 md:gap-4 pt-1 md:pt-2 text-xs md:text-sm">
                       {project.demoLink && (
                         <motion.a
                           href={project.demoLink}
@@ -231,9 +231,9 @@ const ProjectsSection = () => {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="inline-flex items-center space-x-2 text-primary hover:text-primary-light transition-colors"
+                          className="inline-flex items-center gap-1.5 md:gap-2 text-primary hover:text-primary-light transition-colors"
                         >
-                          <ExternalLink size={16} />
+                          <ExternalLink size={14} className="md:h-4 md:w-4" />
                           <span className="font-body">{project.demoLabel || "Ver projeto"}</span>
                         </motion.a>
                       )}
@@ -243,9 +243,9 @@ const ProjectsSection = () => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+                        className="inline-flex items-center gap-1.5 md:gap-2 text-muted-foreground hover:text-foreground transition-colors"
                       >
-                        <Github size={16} />
+                        <Github size={14} className="md:h-4 md:w-4" />
                         <span className="font-body">Código</span>
                       </motion.a>
                     </div>
