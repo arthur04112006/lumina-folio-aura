@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Instagram, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Github, Instagram, Linkedin, Mail, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profilePhoto from "@/eu .png";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  likes: number;
+}
+
+const HeroSection = ({ likes }: HeroSectionProps) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -87,6 +91,21 @@ const HeroSection = () => {
             Desenvolvo sistemas web, automações e soluções com inteligência artificial, unindo front-end,
             back-end e visão prática de produto.
           </motion.p>
+
+          <motion.div
+            variants={itemVariants}
+            className="mb-8 flex justify-center lg:justify-start"
+          >
+            <div className="glass inline-flex items-center gap-3 rounded-full px-4 py-2 text-body-sm font-body text-muted-foreground">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary-light">
+                <ThumbsUp size={16} />
+              </span>
+              <span>
+                <strong className="font-semibold text-foreground">{likes}</strong>{" "}
+                {likes === 1 ? "pessoa curtiu" : "pessoas curtiram"} este portfólio
+              </span>
+            </div>
+          </motion.div>
 
           <motion.div
             variants={itemVariants}

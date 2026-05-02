@@ -1,7 +1,23 @@
 import { motion } from "framer-motion";
 import { Brain, BriefcaseBusiness, Code2, Database, Trophy, Zap } from "lucide-react";
 
+const getAge = (birthDate: Date) => {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const hasHadBirthdayThisYear =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+
+  if (!hasHadBirthdayThisYear) {
+    age -= 1;
+  }
+
+  return age;
+};
+
 const AboutSection = () => {
+  const age = getAge(new Date(2006, 10, 4));
+
   const skills = [
     {
       icon: Code2,
@@ -26,7 +42,7 @@ const AboutSection = () => {
   ];
 
   const stats = [
-    { number: "19", label: "anos" },
+    { number: String(age), label: "anos" },
     { number: "2", label: "hackathons: Itaipu e Biopark" },
     { number: "IA", label: "graduação como bolsista" },
     { number: "Full", label: "back-end, front-end e produto" },

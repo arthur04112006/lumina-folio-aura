@@ -39,7 +39,7 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: "Localização",
-      details: "Brasil",
+      details: "Toledo, PR - Brasil",
       href: "#",
     },
   ];

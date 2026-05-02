@@ -145,26 +145,26 @@ const ProjectsSection = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
             {projects.map((project) => (
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className={`group ${project.featured ? "lg:col-span-2" : ""}`}
+                whileHover={{ y: -6 }}
+                className="group"
               >
                 <Card className={`glass overflow-hidden hover-lift transition-all duration-500 ${
                   project.featured ? "border-primary/20" : ""
                 }`}>
-                  <div className="relative h-64 md:h-80 overflow-hidden">
+                  <div className="relative h-48 md:h-56 overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.accent}`} />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.16),transparent_32%),radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent_28%)]" />
                     <div className="absolute inset-0 flex items-center justify-center px-6">
                       <div className="text-center">
-                        <p className="text-body-sm font-body text-primary-light mb-3 uppercase tracking-[0.22em]">
+                        <p className="text-xs font-body text-primary-light mb-2 uppercase tracking-[0.22em]">
                           Projeto
                         </p>
-                        <h3 className="text-heading-xl md:text-display-sm font-display font-medium text-foreground">
+                        <h3 className="text-heading-lg md:text-heading-xl font-display font-medium text-foreground">
                           {project.title}
                         </h3>
                       </div>
@@ -196,9 +196,9 @@ const ProjectsSection = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 space-y-4">
+                  <div className="p-5 space-y-3">
                     <div className="flex items-center justify-between gap-4">
-                      <h3 className="text-heading-lg font-heading font-semibold text-foreground group-hover:gradient-text transition-all">
+                      <h3 className="text-heading-md font-heading font-semibold text-foreground group-hover:gradient-text transition-all">
                         {project.title}
                       </h3>
                       {project.featured && (
@@ -208,7 +208,7 @@ const ProjectsSection = () => {
                       )}
                     </div>
 
-                    <p className="text-body-md font-body text-muted-foreground leading-relaxed">
+                    <p className="text-body-sm font-body text-muted-foreground leading-relaxed">
                       {project.description}
                     </p>
 
@@ -216,7 +216,7 @@ const ProjectsSection = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className={`px-3 py-1 text-body-sm font-body font-medium rounded-full border ${techStyles[tech] ?? "border-primary/40 bg-primary/10 text-primary-light"}`}
+                          className={`px-2.5 py-1 text-xs font-body font-medium rounded-full border ${techStyles[tech] ?? "border-primary/40 bg-primary/10 text-primary-light"}`}
                         >
                           {tech}
                         </span>

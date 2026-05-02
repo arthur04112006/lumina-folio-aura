@@ -123,12 +123,12 @@
     pointer-events: none;
     background:
       radial-gradient(
-        520px circle at var(--cursor-x) var(--cursor-y),
-        hsl(217 91% 60% / 0.15),
-        hsl(24 95% 53% / 0.07) 32%,
+        340px circle at var(--cursor-x) var(--cursor-y),
+        hsl(217 91% 60% / 0.07),
+        hsl(24 95% 53% / 0.03) 32%,
         transparent 62%
       );
-    opacity: 0.45;
+    opacity: 0.3;
     transition: opacity 0.2s ease;
   }
 
@@ -144,12 +144,12 @@
     pointer-events: none;
     background:
       radial-gradient(
-        260px circle at var(--cursor-x) var(--cursor-y),
-        hsl(217 91% 60% / 0.045),
-        hsl(24 95% 53% / 0.02) 36%,
+        180px circle at var(--cursor-x) var(--cursor-y),
+        hsl(217 91% 60% / 0.025),
+        hsl(24 95% 53% / 0.01) 36%,
         transparent 72%
       );
-    opacity: 0.7;
+    opacity: 0.45;
   }
 
   /* Glow Effects */

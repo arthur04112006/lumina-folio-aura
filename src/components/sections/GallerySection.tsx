@@ -30,7 +30,7 @@ const GallerySection = () => {
   const photos = [
     { src: photoLinkedin, title: "Perfil profissional", description: "Foto utilizada em materiais profissionais e redes." },
     { src: eventItaipu, title: "Evento e tecnologia", description: "Participação em experiências práticas e desafios reais." },
-    { src: eventBiopark, title: "Biopark", description: "Ambiente de aprendizado, inovação e desenvolvimento de soluções." },
+    { src: eventBiopark, title: "Aprendizado", description: "Aprendizado contínuo em ambientes de inovação." },
     { src: eventTeam, title: "Hackathons", description: "Trabalho em equipe, prototipação e entrega sob pressão." },
     { src: projectMomentOne, title: "Projetos práticos", description: "Registros da trajetória em desenvolvimento e tecnologia." },
     { src: projectMomentTwo, title: "Experiência acadêmica", description: "Vivências conectando estudo, prática e produto." },
@@ -38,7 +38,7 @@ const GallerySection = () => {
     { src: projectMomentFour, title: "Eventos", description: "Participação em atividades ligadas a tecnologia e inovação." },
     { src: eventMomentOne, title: "Aprendizado contínuo", description: "Contato com problemas reais e novas abordagens." },
     { src: eventMomentTwo, title: "Tecnologia aplicada", description: "Experiências que fortalecem repertório técnico e colaboração." },
-    { src: postPhoto, title: "Arthur Nicolas", description: "Registro pessoal para apresentação profissional." },
+    { src: postPhoto, title: "Arthur Nicolas", description: "Histórias, momentos e conexões movidas pela tecnologia" },
     { src: galleryScreenshot, title: "Registro de projeto", description: "Parte dos bastidores e materiais da minha trajetória." },
   ];
 

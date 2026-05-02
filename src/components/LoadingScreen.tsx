@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -8,24 +8,50 @@ interface LoadingScreenProps {
 const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const completionStarted = useRef(false);
+  const exitTimer = useRef<number>();
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 16 }, (_, index) => ({
+        id: index,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        duration: 2 + Math.random() * 2,
+        delay: Math.random() * 2,
+      })),
+    [],
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(() => {
-            setIsComplete(true);
-            setTimeout(onComplete, 800);
-          }, 500);
-          return 100;
-        }
-        return prev + Math.random() * 15 + 5;
+        return Math.min(prev + Math.random() * 12 + 6, 100);
       });
     }, 200);
 
     return () => clearInterval(timer);
-  }, [onComplete]);
+  }, []);
+
+  useEffect(() => {
+    if (progress < 100 || completionStarted.current) {
+      return;
+    }
+
+    completionStarted.current = true;
+
+    const completeTimer = window.setTimeout(() => {
+      setIsComplete(true);
+      exitTimer.current = window.setTimeout(onComplete, 800);
+    }, 500);
+
+    return () => {
+      window.clearTimeout(completeTimer);
+
+      if (exitTimer.current) {
+        window.clearTimeout(exitTimer.current);
+      }
+    };
+  }, [onComplete, progress]);
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     event.currentTarget.style.setProperty("--loading-cursor-x", `${event.clientX}px`);
@@ -44,25 +70,25 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         >
           <div className="absolute inset-0 bg-gradient-hero opacity-80" />
           <div className="absolute inset-0 glass-heavy" />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_circle_at_var(--loading-cursor-x)_var(--loading-cursor-y),hsl(217_91%_60%_/_0.24),hsl(24_95%_53%_/_0.10)_36%,transparent_66%)] mix-blend-screen" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(320px_circle_at_var(--loading-cursor-x)_var(--loading-cursor-y),hsl(217_91%_60%_/_0.12),hsl(24_95%_53%_/_0.05)_36%,transparent_66%)] mix-blend-screen" />
 
           <div className="absolute inset-0 overflow-hidden">
-            {[...Array(20)].map((_, i) => (
+            {particles.map((particle) => (
               <motion.div
-                key={i}
+                key={particle.id}
                 className="absolute w-1 h-1 bg-primary rounded-full opacity-30"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: particle.left,
+                  top: particle.top,
                 }}
                 animate={{
                   scale: [0, 1, 0],
                   opacity: [0, 1, 0],
                 }}
                 transition={{
-                  duration: 2 + Math.random() * 2,
+                  duration: particle.duration,
                   repeat: Infinity,
-                  delay: Math.random() * 2,
+                  delay: particle.delay,
                 }}
               />
             ))}
@@ -111,7 +137,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
                 transition={{ delay: 1 }}
                 className="text-body-sm font-body font-medium text-muted-foreground"
               >
-                Carregando portfólio... {Math.floor(progress)}%
+                Carregando portfólio... {Math.floor(Math.min(progress, 100))}%
               </motion.p>
             </div>
 
