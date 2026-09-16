@@ -98,7 +98,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="relative overflow-hidden py-14 md:py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background-secondary to-background" />
-      <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      <div className="absolute left-1/2 top-10 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,hsl(217_91%_60%_/_0.1),transparent_65%)]" />
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <motion.div

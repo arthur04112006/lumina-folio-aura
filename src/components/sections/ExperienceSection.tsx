@@ -83,7 +83,7 @@ const ExperienceSection = () => {
   return (
     <section id="experience" className="relative overflow-hidden py-14 md:py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background-secondary to-background" />
-      <div className="absolute right-0 top-1/3 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+      <div className="absolute -right-24 top-1/4 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,hsl(24_95%_53%_/_0.1),transparent_65%)]" />
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <motion.div

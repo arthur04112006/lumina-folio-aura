@@ -2,12 +2,13 @@ import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { ArrowDown, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/smoothScroll";
 import profilePhoto from "@/assets/optimized/profile-photo.jpg";
 
 const HeroSection = () => {
   const particles = useMemo(
     () =>
-      Array.from({ length: 50 }, () => ({
+      Array.from({ length: 24 }, () => ({
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
         duration: 3 + Math.random() * 4,
@@ -47,23 +48,16 @@ const HeroSection = () => {
     <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-hero" />
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         {particles.map((particle, i) => (
-          <motion.div
+          <span
             key={i}
-            className="absolute h-px w-px rounded-full bg-primary"
+            className="hero-particle"
             style={{
               left: particle.left,
               top: particle.top,
-            }}
-            animate={{
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              delay: particle.delay,
+              animationDuration: `${particle.duration}s`,
+              animationDelay: `${particle.delay}s`,
             }}
           />
         ))}
@@ -113,7 +107,7 @@ const HeroSection = () => {
               variant="hero"
               size="lg"
               className="h-12 rounded-xl px-6 text-sm font-semibold sm:text-base md:h-auto md:px-8 md:py-6 md:text-lg"
-              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => scrollToSection("projects")}
             >
               Ver Projetos
             </Button>
@@ -122,7 +116,7 @@ const HeroSection = () => {
               variant="glass"
               size="lg"
               className="h-12 rounded-xl px-6 text-sm font-semibold sm:text-base md:h-auto md:px-8 md:py-6 md:text-lg"
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => scrollToSection("contact")}
             >
               Entre em Contato
             </Button>
@@ -154,7 +148,7 @@ const HeroSection = () => {
           variants={itemVariants}
           className="order-1 relative mx-auto mt-2 w-40 sm:w-56 md:w-72 lg:order-2 lg:w-80"
         >
-          <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-primary/10 blur-2xl md:-inset-4" />
+          <div className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,hsl(217_91%_60%_/_0.28),hsl(24_95%_53%_/_0.12)_45%,transparent_70%)] md:-inset-8" />
           <div className="relative aspect-square overflow-hidden rounded-full border border-white/15 glass p-2 shadow-2xl">
             <img
               src={profilePhoto}
@@ -175,29 +169,17 @@ const HeroSection = () => {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="cursor-pointer rounded-full glass p-2"
-            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => scrollToSection("about")}
           >
             <ArrowDown size={20} className="text-primary" />
           </motion.div>
         </motion.div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-0">
-        <motion.div
-          animate={{ rotate: 360, y: [-20, 20, -20] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute left-10 top-20 h-20 w-20 rounded-full glass opacity-30"
-        />
-        <motion.div
-          animate={{ rotate: -360, y: [20, -20, 20] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-32 right-16 h-16 w-16 rounded-full glass opacity-20"
-        />
-        <motion.div
-          animate={{ rotate: 360, x: [-30, 30, -30] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute right-10 top-1/2 h-12 w-12 rounded-full glass opacity-40"
-        />
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="floating-orb left-10 top-20 h-20 w-20 opacity-30" style={{ animationDuration: "10s" }} />
+        <div className="floating-orb bottom-32 right-16 h-16 w-16 opacity-20" style={{ animationDuration: "12s" }} />
+        <div className="floating-orb right-10 top-1/2 h-12 w-12 opacity-40" style={{ animationDuration: "8s" }} />
       </div>
     </section>
   );

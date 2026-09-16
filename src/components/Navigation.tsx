@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { scrollToSection } from "@/lib/smoothScroll";
 
 const navItems = [
   { id: "home", label: "Início" },
@@ -14,39 +15,52 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
+    let frame: number | undefined;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-
-      for (let index = navItems.length - 1; index >= 0; index -= 1) {
-        const item = navItems[index];
-        const element = document.getElementById(item.id);
-
-        if (element && element.getBoundingClientRect().top <= 140) {
-          setActiveSection(item.id);
-          break;
-        }
-      }
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 50);
+        frame = undefined;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (visible.length > 0) {
+          setActiveSection(visible[visible.length - 1].target.id);
+        }
+      },
+      { rootMargin: "-140px 0px -55% 0px" }
+    );
+
+    const sectionIds = [...navItems.map((item) => item.id), "gallery"];
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? "glass-heavy backdrop-blur-heavy" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
+        scrolled ? "glass-heavy" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-3 py-3 md:px-6 md:py-4">

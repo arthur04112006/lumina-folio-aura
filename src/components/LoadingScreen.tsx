@@ -53,42 +53,27 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
     };
   }, [onComplete, progress]);
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    event.currentTarget.style.setProperty("--loading-cursor-x", `${event.clientX}px`);
-    event.currentTarget.style.setProperty("--loading-cursor-y", `${event.clientY}px`);
-  };
-
   return (
     <AnimatePresence>
       {!isComplete && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          onPointerMove={handlePointerMove}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background [--loading-cursor-x:50vw] [--loading-cursor-y:50vh]"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background"
         >
           <div className="absolute inset-0 bg-gradient-hero opacity-80" />
-          <div className="absolute inset-0 glass-heavy" />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(320px_circle_at_var(--loading-cursor-x)_var(--loading-cursor-y),hsl(217_91%_60%_/_0.12),hsl(24_95%_53%_/_0.05)_36%,transparent_66%)] mix-blend-screen" />
 
           <div className="absolute inset-0 overflow-hidden">
             {particles.map((particle) => (
-              <motion.div
+              <span
                 key={particle.id}
-                className="absolute w-1 h-1 bg-primary rounded-full opacity-30"
+                className="hero-particle"
                 style={{
                   left: particle.left,
                   top: particle.top,
-                }}
-                animate={{
-                  scale: [0, 1, 0],
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  duration: particle.duration,
-                  repeat: Infinity,
-                  delay: particle.delay,
+                  animationDuration: `${particle.duration}s`,
+                  animationDelay: `${particle.delay}s`,
                 }}
               />
             ))}

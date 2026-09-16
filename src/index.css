@@ -47,10 +47,27 @@
     --ring: 217 91% 60%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 50%));
-    --gradient-accent: linear-gradient(135deg, hsl(24 95% 53%), hsl(30 80% 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(217 91% 10%) 50%, hsl(240 10% 3.9%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(240 6% 8% / 0.8), hsl(240 6% 12% / 0.4));
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(217 91% 60%),
+      hsl(217 91% 50%)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(24 95% 53%),
+      hsl(30 80% 45%)
+    );
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(240 10% 3.9%) 0%,
+      hsl(217 91% 10%) 50%,
+      hsl(240 10% 3.9%) 100%
+    );
+    --gradient-card: linear-gradient(
+      135deg,
+      hsl(240 6% 8% / 0.8),
+      hsl(240 6% 12% / 0.4)
+    );
 
     /* Glass Effect */
     --glass-bg: hsl(240 6% 10% / 0.1);
@@ -75,81 +92,99 @@
   body {
     @apply bg-background text-foreground overflow-x-hidden;
     background: hsl(var(--background));
-    background-image: 
-      radial-gradient(circle at 20% 50%, hsl(217 91% 20% / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(24 95% 53% / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, hsl(217 91% 15% / 0.1) 0%, transparent 50%);
-  }
-
-  html {
-    scroll-behavior: smooth;
   }
 }
 
 @layer components {
-  /* Glass Morphism Effect */
+  /* No backdrop-filter here: blurring behind many cards while scrolling is too costly on mobile */
   .glass {
     background:
-      linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02)),
-      var(--glass-bg);
-    backdrop-filter: blur(18px) saturate(145%);
-    -webkit-backdrop-filter: blur(18px) saturate(145%);
-    border: 1px solid hsl(0 0% 100% / 0.14);
+      linear-gradient(135deg, hsl(0 0% 100% / 0.07), hsl(0 0% 100% / 0.02)),
+      hsl(240 6% 9% / 0.6);
+    border: 1px solid hsl(0 0% 100% / 0.12);
     box-shadow:
-      inset 0 1px 0 hsl(0 0% 100% / 0.12),
-      0 18px 45px hsl(0 0% 0% / 0.22);
+      inset 0 1px 0 hsl(0 0% 100% / 0.1),
+      0 12px 32px hsl(0 0% 0% / 0.2);
   }
 
   .glass-heavy {
-    background: hsl(240 6% 8% / 0.46);
-    backdrop-filter: blur(26px) saturate(160%);
-    -webkit-backdrop-filter: blur(26px) saturate(160%);
-    border: 1px solid hsl(0 0% 100% / 0.1);
-    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.12);
-  }
-
-  .interactive-shell {
-    --cursor-x: 50vw;
-    --cursor-y: 40vh;
-    position: relative;
-    isolation: isolate;
-  }
-
-  .interactive-shell::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        340px circle at var(--cursor-x) var(--cursor-y),
-        hsl(217 91% 60% / 0.07),
-        hsl(24 95% 53% / 0.03) 32%,
-        transparent 62%
-      );
-    opacity: 0.3;
-    transition: opacity 0.2s ease;
-  }
-
-  .interactive-shell > * {
-    position: relative;
-    z-index: 2;
+    background: hsl(240 8% 6% / 0.92);
+    border-bottom: 1px solid hsl(0 0% 100% / 0.08);
   }
 
   .cursor-glow {
     position: fixed;
-    inset: 0;
-    z-index: 3;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 520px;
+    height: 520px;
+    margin: -260px 0 0 -260px;
     pointer-events: none;
-    background:
-      radial-gradient(
-        180px circle at var(--cursor-x) var(--cursor-y),
-        hsl(217 91% 60% / 0.025),
-        hsl(24 95% 53% / 0.01) 36%,
-        transparent 72%
-      );
-    opacity: 0.45;
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle,
+      hsl(217 91% 60% / 0.07),
+      hsl(24 95% 53% / 0.025) 40%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    will-change: transform;
+  }
+
+  .cursor-glow.is-active {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .cursor-glow {
+      display: none;
+    }
+  }
+
+  .hero-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 9999px;
+    background: hsl(var(--primary));
+    opacity: 0;
+    animation: hero-particle ease-in-out infinite;
+  }
+
+  @keyframes hero-particle {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+
+  .floating-orb {
+    position: absolute;
+    border-radius: 9999px;
+    border: 1px solid hsl(0 0% 100% / 0.12);
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 100% / 0.08),
+      hsl(0 0% 100% / 0.01)
+    );
+    animation: floating-orb ease-in-out infinite;
+  }
+
+  @keyframes floating-orb {
+    0%,
+    100% {
+      transform: translate3d(0, -20px, 0);
+    }
+    50% {
+      transform: translate3d(0, 20px, 0);
+    }
   }
 
   /* Glow Effects */
@@ -192,44 +227,43 @@
 
   /* Hover Animations */
   .hover-lift {
-    transition: transform var(--animation-duration) ease, box-shadow var(--animation-duration) ease;
+    transition:
+      transform var(--animation-duration) ease,
+      box-shadow var(--animation-duration) ease;
   }
 
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px hsl(0 0% 0% / 0.3);
+  @media (hover: hover) {
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px hsl(0 0% 0% / 0.3);
+    }
   }
 
   .hover-lift-fast {
-    transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, border-color 0.12s ease-out;
+    transition:
+      transform 0.12s ease-out,
+      box-shadow 0.12s ease-out,
+      border-color 0.12s ease-out;
   }
 
-  .hover-lift-fast:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px hsl(0 0% 0% / 0.3), 0 0 24px hsl(217 91% 60% / 0.16);
-    border-color: hsl(217 91% 60% / 0.28);
+  @media (hover: hover) {
+    .hover-lift-fast:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 10px 25px hsl(0 0% 0% / 0.3),
+        0 0 24px hsl(217 91% 60% / 0.16);
+      border-color: hsl(217 91% 60% / 0.28);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  /* Scroll Animations */
-  .fade-in-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in-up.animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .fade-in-left {
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in-left.animate {
-    opacity: 1;
-    transform: translateX(0);
+  .hero-particle,
+  .floating-orb {
+    animation: none;
   }
 }

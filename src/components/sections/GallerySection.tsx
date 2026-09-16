@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card } from "@/components/ui/card";
+import { pauseSmoothScroll, resumeSmoothScroll } from "@/lib/smoothScroll";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, GalleryHorizontal, LayoutGrid } from "lucide-react";
 import photoLinkedin from "@/assets/optimized/photo-linkedin.jpg";
@@ -90,6 +91,15 @@ const GallerySection = () => {
   };
 
   const openPhoto = openPhotoIndex === null ? null : photos[openPhotoIndex];
+  const isLightboxOpen = openPhoto !== null;
+
+  useEffect(() => {
+    if (!isLightboxOpen) return;
+    pauseSmoothScroll();
+    return () => {
+      resumeSmoothScroll();
+    };
+  }, [isLightboxOpen]);
 
   const stopAutoplay = useCallback(() => {
     if (autoplayRef.current) {
