@@ -1,14 +1,10 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import { ArrowDown, Github, Instagram, Linkedin, Mail, ThumbsUp } from "lucide-react";
+import { ArrowDown, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profilePhoto from "@/assets/optimized/profile-photo.jpg";
 
-interface HeroSectionProps {
-  likes: number;
-}
-
-const HeroSection = ({ likes }: HeroSectionProps) => {
+const HeroSection = () => {
   const particles = useMemo(
     () =>
       Array.from({ length: 50 }, () => ({
@@ -108,22 +104,6 @@ const HeroSection = ({ likes }: HeroSectionProps) => {
               back-end e visão prática de produto.
             </span>
           </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            className="mb-5 flex justify-center md:mb-8 lg:justify-start"
-          >
-            <div className="glass inline-flex max-w-full items-center gap-2 rounded-full px-3 py-2 text-xs font-body text-muted-foreground md:gap-3 md:px-4 md:text-body-sm">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary-light md:h-8 md:w-8">
-                <ThumbsUp size={14} className="md:hidden" />
-                <ThumbsUp size={16} className="hidden md:block" />
-              </span>
-              <span>
-                <strong className="font-semibold text-foreground">{likes}</strong>{" "}
-                {likes === 1 ? "pessoa curtiu" : "pessoas curtiram"} este portfólio
-              </span>
-            </div>
-          </motion.div>
 
           <motion.div
             variants={itemVariants}

@@ -55,8 +55,8 @@ const AboutSection = () => {
     {
       icon: BriefcaseBusiness,
       title: "Experiência profissional",
-      summary: "Atuo na PharmaZap com sistemas para atendimento, gestão e eficiência operacional.",
-      text: "Atualmente atuo na PharmaZap, desenvolvendo e aprimorando sistemas para atendimento, gestão e eficiência operacional em farmácias. Antes disso, trabalhei na Maxicom com automação de testes e também desenvolvi soluções como freelancer.",
+      summary: "Passei por Farma Zapy, Maxicom e ZT Marketing Digital, com QA, automação de testes e design.",
+      text: "Tive experiência na Farma Zapy como analista de qualidade (QA) e comercial, aprimorando sistemas para atendimento farmacêutico. Também trabalhei na Maxicom com automação de testes, na ZT Marketing Digital como designer e desenvolvi soluções web como freelancer.",
     },
     {
       icon: Trophy,
@@ -67,12 +67,13 @@ const AboutSection = () => {
   ];
 
   const journeySteps = [
-    "Ensino médio",
-    "IA como bolsista",
-    "Maxicom",
-    "PharmaZap",
-    "Hackathons",
-    "Full Stack",
+    { title: "Ensino médio", description: "Primeira plataforma, criada para o meu colégio" },
+    { title: "IA como bolsista", description: "Graduação em Inteligência Artificial" },
+    { title: "Maxicom", description: "Estágio em automação de testes" },
+    { title: "Farma Zapy", description: "Analista de qualidade (QA) e comercial" },
+    { title: "ZT Marketing Digital", description: "Designer para redes sociais e campanhas" },
+    { title: "Hackathons", description: "Desafios de inovação e entregas em equipe" },
+    { title: "Full Stack", description: "Sistemas completos com IA e automação" },
   ];
 
   const containerVariants = {
@@ -112,7 +113,8 @@ const AboutSection = () => {
               Sobre Mim
             </h2>
             <p className="mx-auto max-w-3xl font-body text-body-md leading-relaxed text-muted-foreground md:text-body-lg">
-              Desenvolvedor full stack com forte interesse por inteligência artificial, automação e criação de sistemas completos para problemas reais.
+              Desenvolvedor full stack com forte interesse por inteligência artificial, automação e criação de sistemas
+              completos para problemas reais.
             </p>
           </motion.div>
 
@@ -123,28 +125,28 @@ const AboutSection = () => {
                 whileHover={{ rotateX: 1.5, rotateY: -1.5 }}
                 transition={{ type: "spring", stiffness: 180, damping: 18 }}
               >
-                <div className="absolute inset-0 opacity-70">
-                  <div className="absolute left-8 top-20 h-[1px] w-[72%] bg-gradient-to-r from-primary/0 via-primary/50 to-primary/0" />
-                  <div className="absolute left-16 top-36 h-[1px] w-[62%] bg-gradient-to-r from-accent/0 via-accent/40 to-accent/0" />
-                  <div className="absolute left-10 top-52 h-[1px] w-[76%] bg-gradient-to-r from-primary/0 via-primary/35 to-primary/0" />
-                </div>
-
                 <h3 className="relative z-10 mb-3 font-heading text-heading-md font-semibold gradient-text-accent md:mb-4 md:text-heading-lg">
                   Minha Jornada
                 </h3>
                 <div className="relative z-10 space-y-3 font-body text-body-sm leading-relaxed text-muted-foreground md:space-y-4 md:text-body-md">
                   <p className="md:hidden">
-                    Minha jornada começou no ensino médio, criando soluções úteis, e hoje conecta IA, produto e desenvolvimento full stack.
+                    Minha jornada começou no ensino médio, criando soluções úteis, e hoje conecta IA, produto e
+                    desenvolvimento full stack.
                   </p>
                   <div className={`${isJourneyExpanded ? "block" : "hidden"} space-y-3 md:block md:space-y-4`}>
                     <p>
-                      Minha jornada na programação começou ainda no ensino médio, quando desenvolvi uma plataforma para meu colégio com cadastro de alunos e conteúdos em vídeo. Esse primeiro projeto consolidou meu interesse por criar soluções úteis, completas e acessíveis.
+                      Minha jornada na programação começou ainda no ensino médio, quando desenvolvi uma plataforma para
+                      meu colégio com cadastro de alunos e conteúdos em vídeo. Esse primeiro projeto consolidou meu
+                      interesse por criar soluções úteis, completas e acessíveis.
                     </p>
                     <p>
-                      Hoje curso Inteligência Artificial como bolsista e aplico esse aprendizado em projetos que envolvem visão computacional, modelagem matemática, automação e análise técnica. No trabalho, busco transformar necessidades operacionais em ferramentas simples de usar e consistentes.
+                      Hoje curso Inteligência Artificial como bolsista e aplico esse aprendizado em projetos que
+                      envolvem visão computacional, modelagem matemática, automação e análise técnica. No trabalho,
+                      busco transformar necessidades operacionais em ferramentas simples de usar e consistentes.
                     </p>
                     <p>
-                      Tenho base sólida em Java, Python, JavaScript, React, PHP, HTML, CSS, MySQL e PostgreSQL, além de experiência conectando front-end, back-end, banco de dados e integrações em soluções funcionais.
+                      Tenho base sólida em Java, Python, JavaScript, React, PHP, HTML, CSS, MySQL e PostgreSQL, além de
+                      experiência conectando front-end, back-end, banco de dados e integrações em soluções funcionais.
                     </p>
                   </div>
                   <button
@@ -242,41 +244,59 @@ const AboutSection = () => {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
-                  {journeySteps.map((step, index) => (
-                    <motion.div
-                      key={step}
-                      className="min-w-0 sm:flex sm:items-center sm:gap-2"
-                      variants={{
-                        hidden: { opacity: 0, y: 12 },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          transition: {
-                            delay: index * 0.08,
-                            duration: 0.3,
-                            ease: "easeOut",
-                          },
-                        },
-                      }}
-                    >
-                      <span className="flex min-h-10 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.06] px-2.5 py-2 font-body text-xs font-medium leading-tight text-foreground backdrop-blur-xl sm:min-h-0 sm:rounded-full sm:px-3 sm:py-1.5 sm:text-body-sm">
-                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] text-primary-light sm:hidden">
-                          {index + 1}
-                        </span>
-                        {step}
-                      </span>
-                      {index < journeySteps.length - 1 && (
-                        <motion.span
-                          className="hidden text-primary-light sm:inline"
-                          animate={{ x: [0, 3, 0] }}
-                          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                <div className="relative">
+                  <div className="absolute bottom-3 left-[9px] top-3 w-px bg-gradient-to-b from-primary/20 via-primary/60 to-accent/70" />
+
+                  <ol>
+                    {journeySteps.map((step, index) => {
+                      const isCurrent = index === journeySteps.length - 1;
+
+                      return (
+                        <motion.li
+                          key={step.title}
+                          className="relative flex items-start gap-3 pb-3 last:pb-0 md:gap-4"
+                          variants={{
+                            hidden: { opacity: 0, x: -12 },
+                            visible: {
+                              opacity: 1,
+                              x: 0,
+                              transition: {
+                                delay: index * 0.08,
+                                duration: 0.3,
+                                ease: "easeOut",
+                              },
+                            },
+                          }}
                         >
-                          →
-                        </motion.span>
-                      )}
-                    </motion.div>
-                  ))}
+                          <span
+                            className={`relative z-10 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
+                              isCurrent ? "border-primary bg-primary/20 shadow-glow" : "border-white/20 bg-background"
+                            }`}
+                          >
+                            <span
+                              className={`h-2 w-2 rounded-full ${isCurrent ? "bg-gradient-primary" : "bg-primary-light/70"}`}
+                            />
+                          </span>
+
+                          <div className="flex min-w-0 flex-1 flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                            <div className="min-w-0">
+                              <h4 className="font-heading text-sm font-semibold leading-tight text-foreground md:text-base">
+                                {step.title}
+                              </h4>
+                              <p className="font-body text-xs leading-relaxed text-muted-foreground md:text-body-sm">
+                                {step.description}
+                              </p>
+                            </div>
+                            {isCurrent && (
+                              <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 font-body text-[10px] font-medium text-primary-light md:text-xs">
+                                Hoje
+                              </span>
+                            )}
+                          </div>
+                        </motion.li>
+                      );
+                    })}
+                  </ol>
                 </div>
               </motion.div>
             </motion.div>
